@@ -165,21 +165,23 @@ GLUTwrapper::GLUTwrapper ( EventHandlerBase *h )
 
   int a = h->getArgc();
   glutInit(&a,h->getArgv());
+  glutInitContextVersion (3, 3);
+  glutInitContextFlags (GLUT_CORE_PROFILE | GLUT_DEBUG);
   
   glutInitWindowSize(h->getWindowWidth(),h->getWindowHeight());
   glutInitWindowPosition(10,10);
   glutInitDisplayMode(h->getWindowMode());
   windowID = glutCreateWindow("A window");
 
-  // initialize glew and check for OpenGL 4.0 support
-  glewInit();
-  if (glewIsSupported("GL_VERSION_4_0"))
-    cout << "Ready for OpenGL 4.0" << endl;
-  else 
-    {
-      cerr << "OpenGL 4.0 not supported" << endl;
-      exit(1);
-    }
+  glewExperimental=GL_TRUE;
+  GLenum err=glewInit();
+  if(err!=GLEW_OK)
+  {
+    //Problem: glewInit failed, something is seriously wrong.
+    cout<<"glewInit failed, aborting."<<endl;
+    exit(1);
+  }
+
 
   handler = h;
 

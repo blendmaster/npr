@@ -1,6 +1,6 @@
 
 #include <GL/glew.h>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <menucreator.h>
 #include <cstdlib>
 #include <iostream>
@@ -121,7 +121,7 @@ int MenuCreator::endMenu()
 	case ENTRY:
 	  glutAddMenuEntry((*i).first.first.c_str(),(*i).second.first);
 	  HandlerFunc[(*i).second.first] = (*i).second.second;
-	  
+
 	  break;
 	case COLLAPSEDSUB:
 	  glutAddSubMenu((*i).first.first.c_str(),(*i).second.first);

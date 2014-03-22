@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 #include <iostream>
 #include <cstdlib>
@@ -41,7 +41,7 @@ class ViewerEventHandlers : public TrackballHandler, public MenuCreator {
 
   // NEW TYPES ALERT!
   // Texture: a wrapper for a texture object in OpenGL
-  // Framebuffer: an object, usually with some textures attached, that can replace the 
+  // Framebuffer: an object, usually with some textures attached, that can replace the
   //  standard rendering target, i.e. the framebuffer associated with your OpenGL window.
   static Framebuffer *fb;
   static Texture *tcol,*tdepth;
@@ -62,9 +62,9 @@ public:
   // change resolution of the framebuffer to be rendered to to 64x64
   static void res_64()
   {
-    delete_fb();    // delete the current framebuffer 
+    delete_fb();    // delete the current framebuffer
                     //   (the method is implemented just below this section)
-    texsize = 64;   // change the size 
+    texsize = 64;   // change the size
     make_fb();      // re-build the framebuffer, with of the requested size
                     //   (the method is implemented just below this section)
   }
@@ -145,12 +145,12 @@ public:
     fb->attachColor(tcol);
     fb->attachDepth(tdepth);
 
-    // Print out the status of the frame buffer. In particular, if the textures are of 
-    //  wrong type/format, the framebuffer will not be `complete', i.e. suitable for 
+    // Print out the status of the frame buffer. In particular, if the textures are of
+    //  wrong type/format, the framebuffer will not be `complete', i.e. suitable for
     //  rendering into it. If this is the case, you should get a message complaining
-    //  about it in the terminal. For example, it is wrong to use a color texture as 
+    //  about it in the terminal. For example, it is wrong to use a color texture as
     //  the depth texture or the other way around. The restrictions are mostly common
-    //  sense. See specification for more details. 
+    //  sense. See specification for more details.
     fb->printLog();
   }
 
@@ -169,7 +169,7 @@ public:
   static void timerFunc( int )
   {
     // move light source (if it is supposed to move)
-    if (lightMoving) 
+    if (lightMoving)
       lloc = vec3(rotate(mat4(),.75f,vec3(0.0,0.0,1.0))*vec4(lloc,1.0));
 
     glutTimerFunc(30,timerFunc,0);  // come here again in 30ms
@@ -188,7 +188,6 @@ public:
     vaSquare = new VertexArray;
     vaSquare->attachAttribute(0,qbuf);
 
-
     // we'll use the familiar Phong program and a program to apply texture to the square
 
     pgmPhong = createProgram(ShaderFile(Vert,"shaders/vtxPhong.glsl"),
@@ -196,7 +195,7 @@ public:
     pgmSquare = createProgram(ShaderFile(Vert,"shaders/vtxSquare.glsl"),
 			    ShaderFile(Frag,"shaders/frgSquare.glsl"));
 
-    // this should look familiar: use the Mesh class to read mesh and get 
+    // this should look familiar: use the Mesh class to read mesh and get
     //  vertex locations, normals and triangle table (to be used as the index buffer)
 
     Mesh M(getArgv()[1]);
@@ -211,7 +210,7 @@ public:
 
     vaPhong = new VertexArray();
     vaPhong->attachAttribute(0,vloc);
-    vaPhong->attachAttribute(1,vnormal); 
+    vaPhong->attachAttribute(1,vnormal);
 
     // want to use culling, depth test and white background
 
@@ -253,14 +252,14 @@ public:
     // clear the WINDOW
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+
     // set up culling...
 
     if (reor>0)
       glCullFace(GL_BACK);
     else
       glCullFace(GL_FRONT);
-    
+
     // modelview and projection matrices are as always...
 
     mat4 ModelView =  translate(mat4(),vec3(0.0f,0.0f,-20.0f)) *
@@ -285,12 +284,12 @@ public:
 
     // Here, we render into our frame buffer.
 
-    fb->on();   // Turn on the framebuffer; Until it is turned off, the framebuffer will be used as 
+    fb->on();   // Turn on the framebuffer; Until it is turned off, the framebuffer will be used as
                 // the rendering target.
 
-    glViewport(0,0,texsize,texsize);  // The framebuffer has a different resolution than the 
-                                      // window. This changes the viewport transformation to 
-    // scaling [-1,1]x[-1,1] (normalized coordinates, after modelview and projection transformations) 
+    glViewport(0,0,texsize,texsize);  // The framebuffer has a different resolution than the
+                                      // window. This changes the viewport transformation to
+    // scaling [-1,1]x[-1,1] (normalized coordinates, after modelview and projection transformations)
     //   --> [0,texsize]x[0,texsize]
 
     pgmPhong->on();  // turn the Phong program on
@@ -302,7 +301,6 @@ public:
     pgmPhong->off();  // turn the program off
 
     fb->off();  // turn the framebuffer off; currently active framebuffer = our window
-
 
     // Here, we render the texture into the GLUT window
 
@@ -317,7 +315,7 @@ public:
 
     t->bind(1);  // bind the texture to attachment point #1; use small numbers as TAP IDs!
 
-    // resolution of the framebuffer has changes, so the viewport transform needs to be 
+    // resolution of the framebuffer has changes, so the viewport transform needs to be
     //  updated; we need scaling [-1,1]^2 ---> [0,width of window] x [0, height of window]
     glViewport(0,0,getWindowWidth(),getWindowHeight());
 

@@ -1,4 +1,4 @@
-#version 420
+#version 330
 
 // this is a standard Phong vertex shader...
 

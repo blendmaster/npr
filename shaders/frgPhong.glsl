@@ -1,4 +1,5 @@
-#version 420
+#version 330
+#extension GL_ARB_shading_language_420pack: enable
 
 // this is a standard Phong fragment shader...
 

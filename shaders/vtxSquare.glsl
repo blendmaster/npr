@@ -1,4 +1,4 @@
-#version 420
+#version 330
 
 // locations of vertices of the square, in range -1..1 (see C++ code)
 layout(location=0) in vec2 coord;
