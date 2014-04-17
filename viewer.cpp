@@ -277,8 +277,8 @@ public:
     pgmPhong->setUniform("kd",vec3(0.5,0.7,0.9));
     pgmPhong->setUniform("ka",vec3(0.5,0.7,0.9));
     pgmPhong->setUniform("ks",vec3(0.3,0.3,0.3));
-    pgmPhong->setUniform("I",vec3(0.8,0.8,0.8));
-    pgmPhong->setUniform("Ia",vec3(0.2,0.2,0.2));
+    /* pgmPhong->setUniform("I",vec3(0.8,0.8,0.8)); */
+    /* pgmPhong->setUniform("Ia",vec3(0.2,0.2,0.2)); */
     pgmPhong->setUniform("nspec",1000.0f);
     pgmPhong->setUniform("reor",reor);
 

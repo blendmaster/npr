@@ -38,5 +38,5 @@ void main() {
 
   vec3 mag = sqrt((horiz * horiz) + (vert * vert));
 
-  color = length(mag) > 0.7 ? vec3(0) : texture(tex,loc).rgb;
+  color = length(mag) > 0.5 ? vec3(0) : texture(tex,loc).rgb - mag;
 }
