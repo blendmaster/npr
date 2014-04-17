@@ -306,14 +306,16 @@ public:
 
     glCullFace(GL_BACK);  // the square is oriented CCW
 
-    Texture *t = showColor ? tcol : tdepth;  // t: texture to be shown
+    if (nearestInterpolation) {
+      tcol->nearest();
+      tdepth->nearest();
+    } else {
+      tcol->linear();
+      tdepth->linear();
+    }
 
-    if (nearestInterpolation) // set interpolation method for the texture
-      t->nearest();
-    else
-      t->linear();
-
-    t->bind(1);  // bind the texture to attachment point #1; use small numbers as TAP IDs!
+    tcol->bind(1);  // bind the texture to attachment point #1; use small numbers as TAP IDs!
+    tdepth->bind(2);  // bind the texture to attachment point #1; use small numbers as TAP IDs!
 
     // resolution of the framebuffer has changes, so the viewport transform needs to be
     //  updated; we need scaling [-1,1]^2 ---> [0,width of window] x [0, height of window]
