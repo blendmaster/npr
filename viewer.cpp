@@ -216,7 +216,7 @@ public:
 
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
-    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
     glEnable(GL_DEPTH_TEST);
 
     // build the framebuffer

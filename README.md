@@ -4,6 +4,10 @@ A pretty vanilla implementation of NPR in openGL 3.3,
 done for CSCI 544 Advanced Computer Graphics Spring 2014, at the
 Colorado School of Mines, Project 5.
 
+Based on this paper:
+
+http://www.cs.northwestern.edu/~ago820/SIG98/gooch98.pdf
+
 Models that work with the viewer code can be found here:
 
 - small:
@@ -15,7 +19,19 @@ Models that work with the viewer code can be found here:
 
 # Screenshots
 
-TODO
+![bunny](screenshots/bunny.png)
+
+![happy](screenshots/happy.png)
+
+![hand](screenshots/hand.png)
+
+As a side effect of how outlines are drawn (sobel filter in texture space, but
+_after_ scaling), turning down the resolution from the first pass results in
+some neat looking images (with nearest neighbor sampling).
+
+![hand64](screenshots/hand64.png)
+
+![eagle256](screenshots/eagle256.png)
 
 # Running
 
