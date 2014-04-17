@@ -19,6 +19,15 @@ Models that work with the viewer code can be found here:
 
 # Screenshots
 
+Using the sobel filter on the depth texture:
+
+![happy-depth](screenshots/happy-depth.png)
+
+![moto](screenshots/moto.png)
+
+Earlier screenshots used the sobel filter on the color pixels instead of
+the depth map, for slightly worse results.
+
 ![bunny](screenshots/bunny.png)
 
 ![happy](screenshots/happy.png)
