@@ -321,6 +321,8 @@ public:
 
     // render the square; see how the square shaders use the texture...
     pgmSquare->on();
+    pgmSquare->setUniform("xo", (float)1.0 / ((float) getWindowWidth()));
+    pgmSquare->setUniform("yo", (float)1.0 / ((float) getWindowHeight()));
     vaSquare->sendToPipeline(GL_TRIANGLE_STRIP,0,4);  // send 4 vertices
     pgmSquare->off();
   }
